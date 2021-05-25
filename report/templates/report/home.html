@@ -1,0 +1,20 @@
+{% extends "report/base.html"%}
+{% block content %}
+    {% for post in posts %}
+        {% if post.author == user %}
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.author }}, {{ post.author.council }} Council</a>
+                <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.progress }} for {{ post.problem }} Solution at:<br> {{ post.street_num }} {{ post.street_name }}, {{ post.suburb }}</a></h2>
+            <p class="article-content">{{ post.description }}</p>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" style="max-height:300px">
+            {% endif %}
+        {% endif %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

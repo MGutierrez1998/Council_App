@@ -1,0 +1,22 @@
+{% extends "report/base.html"%}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}, {{ object.author.council }} Council</a>
+            <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+            {% if object.author == user %}
+                <div>
+                    <a class="btn-secondary btn-sm mt-1 mb-1"href="{% url 'post-update' object.id %}">Update</a>
+                    <a class="btn-danger btn-sm mt-1 mb-1"href="{% url 'post-delete' object.id %}">Delete</a>
+                </div>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{ post.progress }} for {{ post.problem }} Solution at:<br>{{ post.street_num }} {{ post.street_name }}, {{ post.suburb }}</h2>
+        <p class="article-content">{{ post.description }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" style="max-height:300px">
+        {% endif %}
+        </div>
+    </article>
+{% endblock content %}
